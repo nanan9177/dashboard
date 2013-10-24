@@ -14,6 +14,9 @@
  */
 $baseFontFamily: 'Gotham A', 'Gotham B', sans-serif;
 $headingsFontWeight: 400;
+$btnPrimaryBackground: orange;
+$btnPrimaryBackgroundHighlight: orange;
+
 @import "bootstrap";
 
 $header_text: white;
@@ -34,6 +37,11 @@ h1 {
 
 h2 {
   font-weight: 500;
+}
+
+hr {
+  border-color: #0094ca;
+  border-bottom: none;
 }
 
 th {
@@ -232,10 +240,10 @@ th {
 }
 
 .header_separator {
-  padding-left: 4px;
+  padding-left: 2px;
   margin-bottom: -18px;
   margin-top: -8px;
-  margin-right: 4px;
+  margin-right: 2px;
   height: 42px;
   border-right: 1px solid $inset_color;
   border-right-style: inset;
@@ -326,8 +334,14 @@ body .modal {
   cursor: pointer;
 }
 
+.header_trophy_link:hover {
+  background-color: transparent;
+  text-decoration: none;
+}
+
 .header_popup_link:hover {
-  background-color: $bkgnd_color;
+  background-color: transparent;
+  text-decoration: none;
 }
 
 .header_popup_link_glyph {

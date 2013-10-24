@@ -1,29 +1,44 @@
-%h1 Add students
+- @page_title = "Add students"
+
+= render partial: 'shared/teacher_nav', locals: { current: 'addstudents' }
+
+%h1= @page_title
+
+%br/
+
+%h4 Have students to register themselves
 
 %p
-  %h4 Add students by email
-
-  = form_for([Follower.new]) do |f|
-    = text_field_tag(:student_email_or_username, nil, placeholder: 'student@school.edu')
+  Ask your students to visit
+  %b= link_to 'code.org/join', 'http://code.org/join'
+  and enter their section-code:
+  %br/
+  - if current_user.sections.empty?
+    First, please #{link_to 'add a section', new_section_path}
+  - else
+    - current_user.sections.each do |section|
+      For
+      %b= section.name
+      enter:
+      %b= section.code
+      = link_to '(Send in email)', build_invite_mailto(section, current_user), target: :_blank
+      %br/
     %br/
-    = submit_tag('Invite student')
+    = link_to 'Add section', new_section_path
 
-%p
-  %h4 Create accounts for your students
-  - user = User.new
-  = form_for(user, url: { action: :create_student }) do |f|
-    = render partial: 'new_student_form', locals: { f: f, user: user }
-
-- if current_user.sections.length > 0
-  %p
-    %h4 Have students to register themselves by sharing a this link with them
-
-    %table
-      %tr
-        %th Section
-        %th link
-      - current_user.sections.each do |section|
-        %tr
-          %td= section.name
-          %td= link_to student_user_new_url(section_code: section.code), student_user_new_path(section_code: section.code)
-
+-#%hr
+-#
+-#%h4 Add students by email
+-#%p
+-#  = form_for([Follower.new]) do |f|
+-#    = text_field_tag(:student_email_or_username, nil, class: 'input-xlarge', placeholder: 'student@school.edu')
+-#    %br/
+-#    = submit_tag 'Invite student', class: "btn btn-primary"
+-#
+-#%hr
+-#
+-#%h4 Create accounts for your students
+-#%p
+-#  - user = User.new
+-#  = form_for(user, url: { action: :create_student }) do |f|
+-#    = render partial: 'new_student_form', locals: { f: f, user: user }
